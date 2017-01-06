@@ -35,6 +35,13 @@ def search_tag(request, tag) :
         raise Http404
     return render(request, 'tag.html', {'post_list' : post_list})
 
+def archives(request) :
+    try:
+        post_list = Article.objects.all()
+    except Article.DoesNotExist :
+        raise Http404
+    return render(request, 'archives.html', {'post_list' : post_list, 
+                                            'error' : False})
 
 def test(request) :
     return render(request, 'test.html', {'current_time': datetime.now()})
